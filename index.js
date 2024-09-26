@@ -1,6 +1,9 @@
 //import dataservice file
 const dataservice=require("./service/dataservice")
 
+// import jason web token
+const jwt=require('jsonwebtoken')
+
 
 // import express
 
@@ -13,6 +16,18 @@ const dataservice=require("./service/dataservice")
 
 //to parse json data from req body ( to convert the data inside the express)
 app.use(express.json())
+
+
+//middleware
+const jwtMiddleware=(req,res,next)=>{
+    const token=req.body.token
+    //verify token
+     const tokendata=jwt.verify(token,"tokenkey")
+     console.log(tokendata);
+    
+     next()
+   }
+
 
 
 
@@ -28,24 +43,36 @@ app.use(express.json())
 
   //login
   app.get('/login',(req,res)=>{
-    const result=dataservice.login(req.body.acno, req.body.psw)
+    const result=dataservice.login(req.body.acno, req.body.psw) 
     //convert object into json and send as response and always change  status of response code
     res.status(result.statuscode).json(result)   
   })
 
 
   //deposit
-  app.post('/deposit',(req,res)=>{
+
+  app.post('/deposit', jwtMiddleware, (req,res)=>{
     const result=dataservice.deposit(req.body.acnum, req.body.password, req.body.amount)
     //convert object into json and send as response and always change  status of response code
     res.status(result.statuscode).json(result)
   })
 
-
-  
-  //withdraw
+   
+  //withdrawl
+  app.post('/withdrawl', jwtMiddleware ,(req,res)=>{
+    const result=dataservice.withdrawl(req.body.acnum, req.body.password, req.body.amount)
+    //convert object into json and send as response and always change  status of response code
+    res.status(result.statuscode).json(result)
+  })
 
   //getTransfer
+  app.get('/getTransaction',jwtMiddleware,(req,res)=>{
+    const result=dataservice.getTransaction(req.body.acno) 
+    //convert object into json and send as response and always change  status of response code
+    res.status(result.statuscode).json(result)   
+  })
+
+
   //delete
 
 

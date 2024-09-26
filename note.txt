@@ -51,3 +51,30 @@ so we use another server , that is Nodemon
  
 installed by -   npm i -g nodemon
 
+
+
+   TOKEN in server
+--------------------------
+JWT TOKEN - json web token   --> used for user varification
+ install - npm i jsonwebtoken
+
+ library - jsonwebtoken
+ method - sign()     method used for generate jwt token
+
+varify() -  used to varify jsonwebtoken
+
+ TOKEN verification
+ -------------------------
+middlewares : 
+    token verification is done by using middlewares
+    middlewares have capacity to control server requests
+
+  middlewares is a fn with 3 arguments  : request, response, next
+
+  2 type of middlewares - 
+            1. Application specific middlewares - work before all requests
+            2. Router specific middlewares  - work which it is to be specifed in requests when it is needed
+
+
+
+                                         
