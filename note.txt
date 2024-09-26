@@ -1,0 +1,53 @@
+     server creation
+--------------------------------
+
+npm init       - create package.json
+npm i express  - create node_module and package.lock.json  files  (create express frame work)
+                 - to create globally    - npm i express g
+
+
+server side technology - node  (resolve all request simultaneosly)
+
+  api (the client and server can pass the request through these api)
+--------------------  
+http request  (request snd in the form of http)
+
+header - contain secret data
+body - normal data(passing data) in the form of JSON
+
+
+   http rqst types
+-------------------------------
+GET  - to get the  data from db
+POST -  create data
+PUT  -  complete updation
+PATCH - partial updation
+DELETE  delete data
+
+
+  server response status code
+-----------------------------------
+100 - information passing (alert)
+200 - success
+300 - redirection
+400 - client error
+500 - server side error   
+
+
+
+     server creation steps
+------------------------------------
+ 1. import express
+ 2. create app using express
+ 3. set port number for run the server  in 3000 series
+ 4. resolve http request 
+
+
+
+ Nodemon
+ ---------
+if we run server using node, recombilation not work
+so we use another server , that is Nodemon
+ 
+installed by -   npm i -g nodemon
+
