@@ -77,4 +77,65 @@ middlewares :
 
 
 
-                                         
+how to solve runtime error in json
+---------------------------------------
+
+try except block :
+-------------------
+try : error causing code
+
+catch : error solving
+    
+
+
+             mongoDB - database
+-----------------------------------
+install mongoDB server
+
+
+  shell commonds
+-----------------------
+CRUD operations
+
+show dbs              - to see database
+
+use <database_name>   - to open a database
+
+show collections      - to see collections inside the db
+
+db.<collection_name>.find()  - to read all data in collections
+
+db.<collection_name>.findOne({"key":value})   - to read single data
+
+db.<collection_name>.insertOne({"key":value, "key":value,............}) - create new data (only create single data at a time)
+
+ -{mongoDB query operators in my notebook with eg}
+
+
+ db.<collection_name>.deleteOne({"uname":"anu"})  - used to delete ....single data delete at a time
+                            delete count - which show no: of data to be deleted..(if 2 or more anu is here delete all anu)
+
+
+ db.<collection_name>.updateOne({uname:anu},{$set:{uname:anu v}})  - update data 
+
+
+
+
+SERVER & DATABASE integration
+-----------------------------------------------------
+database - 27017
+server   -3000
+
+mongoose - it is a library which is used for server mdb integration
+
+install  - npm i mongoose
+
+steps for integration
+-------------------------
+1. import mongoose
+2. state a connection string to integrate
+3. define a model for our collections
+
+
+
+

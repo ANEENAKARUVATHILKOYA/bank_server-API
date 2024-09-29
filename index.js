@@ -19,23 +19,33 @@ app.use(express.json())
 
 
 //middleware
-const jwtMiddleware=(req,res,next)=>{
-    const token=req.body.token
+    const jwtMiddleware=(req,res,next)=>{
+      try{
+    const token=req.headers['access_token']
     //verify token
      const tokendata=jwt.verify(token,"tokenkey")
      console.log(tokendata);
     
      next()
    }
-
+   catch{
+       res.status(422).json({
+           statuscode:422,
+           status    :false,
+           message   :" Error! please login"
+      })
+   }
+  }
+  
 
 
 
   //register - post
   app.post('/register',(req,res)=>{
-    const result=dataservice.register(req.body.username, req.body.acno, req.body.psw)
+      dataservice.register(req.body.username, req.body.acno, req.body.psw).then(result=>{
+        res.status(result.statuscode).json(result)
+      })
     //convert object into json and send as response and always change  status of response code
-    res.status(result.statuscode).json(result)
     //console.log(req.body); 
     //res.send("success")
   })
@@ -71,7 +81,7 @@ const jwtMiddleware=(req,res,next)=>{
     //convert object into json and send as response and always change  status of response code
     res.status(result.statuscode).json(result)   
   })
-
+    
 
   //delete
 
