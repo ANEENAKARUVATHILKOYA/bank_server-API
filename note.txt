@@ -130,12 +130,21 @@ mongoose - it is a library which is used for server mdb integration
 
 install  - npm i mongoose
 
-steps for integration
+steps for integration:
 -------------------------
 1. import mongoose
 2. state a connection string to integrate
 3. define a model for our collections
 
 
+front-end server integration
+-----------------------------------
+CORS- cross orgin resource sharing -> library used for front-end server integration
+ 
+front-end - 4000
+server    - 3000
 
-
+steps for integration :
+--------------------------------
+1. import cors
+2. connection string

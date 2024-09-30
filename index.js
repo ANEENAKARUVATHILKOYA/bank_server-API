@@ -1,6 +1,10 @@
 //import dataservice file
 const dataservice=require("./service/dataservice")
 
+//import cors
+const cors=require("cors")
+
+
 // import jason web token
 const jwt=require('jsonwebtoken')
 
@@ -12,6 +16,10 @@ const jwt=require('jsonwebtoken')
 
 //app creation using express 
   const app=express()
+
+  //connection string for front-end integration
+  app.use(cors({orgin:'http://localhost:4200/'}))
+
 
 
 //to parse json data from req body ( to convert the data inside the express)
