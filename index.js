@@ -22,7 +22,7 @@ app.use(express.json())
     const jwtMiddleware=(req,res,next)=>{
       try{
     const token=req.headers['access_token']
-    //verify token
+ //verify token
      const tokendata=jwt.verify(token,"tokenkey")
      console.log(tokendata);
     
@@ -39,9 +39,8 @@ app.use(express.json())
   
 
 
-
   //register - post
-  app.post('/register',(req,res)=>{
+   app.post('/register',(req,res)=>{
       dataservice.register(req.body.username, req.body.acno, req.body.psw).then(result=>{
         res.status(result.statuscode).json(result)
       })
@@ -53,33 +52,38 @@ app.use(express.json())
 
   //login
   app.get('/login',(req,res)=>{
-    const result=dataservice.login(req.body.acno, req.body.psw) 
+    dataservice.login(req.body.acno, req.body.psw).then(result=>{
+      res.status(result.statuscode).json(result) 
+    })
     //convert object into json and send as response and always change  status of response code
-    res.status(result.statuscode).json(result)   
-  })
+    //res.status(result.statuscode).json(result)   
+   })
 
 
   //deposit
-
   app.post('/deposit', jwtMiddleware, (req,res)=>{
-    const result=dataservice.deposit(req.body.acnum, req.body.password, req.body.amount)
+    dataservice.deposit(req.body.acnum, req.body.password, req.body.amount).then(result=>{
+      res.status(result.statuscode).json(result)
+    })
     //convert object into json and send as response and always change  status of response code
-    res.status(result.statuscode).json(result)
+    //res.status(result.statuscode).json(result)
   })
 
    
   //withdrawl
   app.post('/withdrawl', jwtMiddleware ,(req,res)=>{
-    const result=dataservice.withdrawl(req.body.acnum, req.body.password, req.body.amount)
+    dataservice.withdrawl(req.body.acnum, req.body.password, req.body.amount).then(result=>{
+      res.status(result.statuscode).json(result)
+    })
     //convert object into json and send as response and always change  status of response code
-    res.status(result.statuscode).json(result)
   })
 
   //getTransfer
   app.get('/getTransaction',jwtMiddleware,(req,res)=>{
-    const result=dataservice.getTransaction(req.body.acno) 
-    //convert object into json and send as response and always change  status of response code
-    res.status(result.statuscode).json(result)   
+    dataservice.getTransaction(req.body.acno).then(result=>{
+      res.status(result.statuscode).json(result)   
+    }) 
+    //convert object into json and send as response and always change  status of response code 
   })
     
 

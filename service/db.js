@@ -14,7 +14,7 @@ const User= mongoose.model('User',{
     password:String,
     balance:Number,
     transaction:[]
-})
+}) 
 
 //export
 
