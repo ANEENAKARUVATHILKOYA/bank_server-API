@@ -88,7 +88,7 @@ var amnt=parseInt(amount)
         user.save()
         return{
           status    : true,
-          message   :`${amnt}is credited to your account and the available balance ${user.balance}}`,
+          message   :`${amnt}is credited to your account and the available balance ${user.balance}`,
           statuscode:200
         }
       }
@@ -154,6 +154,21 @@ getTransaction=(acno)=>{
 
    })
  }
+
+
+
+ deleteAcc=(acno)=>{
+     return db.User.deleteOne({acno}).then(user=>{
+            if(user){
+              return{
+                status    :true,
+                statuscode:200,
+                message   :"account deleted"
+              }
+            }  
+            
+      })
+ }
   
 
 
@@ -163,5 +178,6 @@ getTransaction=(acno)=>{
     login,
     deposit,
     withdrawl,
-    getTransaction
+    getTransaction,
+    deleteAcc
   }

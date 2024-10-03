@@ -18,7 +18,7 @@ const jwt=require('jsonwebtoken')
   const app=express()
 
   //connection string for front-end integration
-  app.use(cors({orgin:'http://localhost:4200/'}))
+  app.use(cors({orgin:'http://localhost:4200'}))
 
 
 
@@ -59,13 +59,14 @@ app.use(express.json())
 
 
   //login
-  app.get('/login',(req,res)=>{
+  app.post('/login',(req,res)=>{
     dataservice.login(req.body.acno, req.body.psw).then(result=>{
       res.status(result.statuscode).json(result) 
     })
     //convert object into json and send as response and always change  status of response code
     //res.status(result.statuscode).json(result)   
    })
+
 
 
   //deposit
@@ -79,7 +80,7 @@ app.use(express.json())
 
    
   //withdrawl
-  app.post('/withdrawl', jwtMiddleware ,(req,res)=>{
+  app.post('/withdraw', jwtMiddleware ,(req,res)=>{
     dataservice.withdrawl(req.body.acnum, req.body.password, req.body.amount).then(result=>{
       res.status(result.statuscode).json(result)
     })
@@ -87,7 +88,7 @@ app.use(express.json())
   })
 
   //getTransfer
-  app.get('/getTransaction',jwtMiddleware,(req,res)=>{
+  app.post('/transaction',jwtMiddleware,(req,res)=>{
     dataservice.getTransaction(req.body.acno).then(result=>{
       res.status(result.statuscode).json(result)   
     }) 
@@ -96,6 +97,14 @@ app.use(express.json())
     
 
   //delete
+  app.delete('/delete/:acno',jwtMiddleware,(req,res)=>{
+            dataservice.deleteAcc(req.params.acno).then(result=>{
+              res.status(result.statuscode).json(result)
+            })
+  })
+  
+
+  
 
 
 
